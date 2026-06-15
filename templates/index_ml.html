@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AI ChatBot with Machine Learning</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style_ml.css') }}" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    </head>
+    <body>
+        <div class="main-container">
+            <!-- Sidebar with ML Insights -->
+            <div class="sidebar" id="sidebar">
+                <div class="sidebar-header">
+                    <h2><i class="fas fa-brain"></i> ML Insights</h2>
+                    <button class="toggle-sidebar" onclick="toggleSidebar()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="insights-container">
+                    <!-- Sentiment Analysis -->
+                    <div class="insight-card">
+                        <h3><i class="fas fa-smile"></i> Sentiment</h3>
+                        <div class="sentiment-display">
+                            <div class="sentiment-emoji" id="sentimentEmoji">😐</div>
+                            <div class="sentiment-label" id="sentimentLabel">Neutral</div>
+                            <div class="sentiment-score" id="sentimentScore">0.0</div>
+                        </div>
+                    </div>
+
+                    <!-- Intent Classification -->
+                    <div class="insight-card">
+                        <h3><i class="fas fa-bullseye"></i> Current Intent</h3>
+                        <div class="intent-display">
+                            <span class="intent-badge" id="intentBadge">General</span>
+                        </div>
+                    </div>
+
+                    <!-- Topics Detected -->
+                    <div class="insight-card">
+                        <h3><i class="fas fa-tags"></i> Topics</h3>
+                        <div class="topics-display" id="topicsDisplay">
+                            <span class="topic-tag">No topics yet</span>
+                        </div>
+                    </div>
+
+                    <!-- User Profile -->
+                    <div class="insight-card">
+                        <h3><i class="fas fa-user-chart"></i> Your Profile</h3>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <span class="stat-label">Messages</span>
+                                <span class="stat-value" id="messageCount">0</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Mood Trend</span>
+                                <span class="stat-value" id="moodTrend">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Top Interests -->
+                    <div class="insight-card">
+                        <h3><i class="fas fa-heart"></i> Your Interests</h3>
+                        <div class="interests-list" id="interestsList">
+                            <em>Start chatting to discover your interests!</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Chat Area -->
+            <div class="chat-container">
+                <!-- Header -->
+                <div class="chat-header">
+                    <button class="toggle-sidebar-btn" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="header-content">
+                        <i class="fas fa-robot"></i>
+                        <div>
+                            <h1>AI ChatBot</h1>
+                            <span class="subtitle">Powered by GPT + ML</span>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <button class="icon-btn" onclick="showInsights()" title="View Insights">
+                            <i class="fas fa-chart-line"></i>
+                        </button>
+                        <button class="icon-btn" onclick="exportData()" title="Export Data">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="clear-btn" onclick="clearChat()"><i class="fas fa-trash"></i> Clear</button>
+                    </div>
+                </div>
+
+                <!-- Chat Messages Area -->
+                <div class="chat-messages" id="chatMessages">
+                    <div class="welcome-message">
+                        <i class="fas fa-brain"></i>
+                        <h2>Welcome to AI ChatBot with ML!</h2>
+                        <p>I'm powered by GPT and Machine Learning</p>
+                        <div class="features">
+                            <span><i class="fas fa-check"></i> Sentiment Analysis</span>
+                            <span><i class="fas fa-check"></i> Intent Detection</span>
+                            <span><i class="fas fa-check"></i> Smart Learning</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suggestions Area -->
+                <div class="suggestions-area" id="suggestionsArea" style="display: none">
+                    <div class="suggestions-label"><i class="fas fa-lightbulb"></i> Suggestions:</div>
+                    <div class="suggestions-list" id="suggestionsList"></div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="chat-input-container">
+                    <div class="input-wrapper">
+                        <textarea id="userInput" placeholder="Type your message here..." rows="1" onkeypress="handleKeyPress(event)"></textarea>
+                        <button class="send-btn" onclick="sendMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ML Insights Modal -->
+        <div class="modal" id="insightsModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><i class="fas fa-chart-pie"></i> Detailed ML Insights</h2>
+                    <button class="close-modal" onclick="closeModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Insights will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <script src="{{ url_for('static', filename='script_ml.js') }}"></script>
+    </body>
+</html>
